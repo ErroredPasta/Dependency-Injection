@@ -17,21 +17,18 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<MainViewModel> { viewModelFactory }
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    private val mainActivityComponent by lazy {
-        (application as ConversionApplication).appComponent
-            .getMainActivityComponentFactory()
-            .create()
+    private val mainActivityContainer by lazy {
+        (application as ConversionApplication).appContainer
+            .activityContainerFactory.create()
     }
 
     private val baseCurrencySelectionDialog by lazy {
@@ -60,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
     @FlowPreview
     override fun onCreate(savedInstanceState: Bundle?) {
-        mainActivityComponent.inject(this)
+        viewModelFactory = mainActivityContainer.viewModelFactory
 
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
