@@ -18,8 +18,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-@AndroidEntryPoint(AppCompatActivity::class)
-class MainActivity : Hilt_MainActivity() {
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<MainViewModel>()
     private val binding by lazy {
