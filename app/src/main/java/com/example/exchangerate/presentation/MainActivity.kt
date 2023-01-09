@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.exchangerate.R
@@ -13,25 +12,18 @@ import com.example.exchangerate.domain.exception.ConversionException
 import com.example.exchangerate.domain.model.Currency
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+@AndroidEntryPoint(AppCompatActivity::class)
+class MainActivity : Hilt_MainActivity() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel by viewModels<MainViewModel> { viewModelFactory }
+    private val viewModel by viewModels<MainViewModel>()
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
-    }
-
-    private val mainActivityComponent by lazy {
-        (application as ConversionApplication).appComponent
-            .getMainActivityComponentFactory()
-            .create()
     }
 
     private val baseCurrencySelectionDialog by lazy {
@@ -60,8 +52,6 @@ class MainActivity : AppCompatActivity() {
 
     @FlowPreview
     override fun onCreate(savedInstanceState: Bundle?) {
-        mainActivityComponent.inject(this)
-
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 

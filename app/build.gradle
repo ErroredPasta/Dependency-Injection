@@ -60,9 +60,9 @@ dependencies {
     testImplementation "com.squareup.okhttp3:mockwebserver:4.9.3"
     // endregion Retrofit2 =========================================================================
 
-    // region Dagger2 ==============================================================================
-    implementation 'com.google.dagger:dagger:2.43.2'
-    kapt 'com.google.dagger:dagger-compiler:2.43.2'
+    // region Dagger Hilt ==========================================================================
+    implementation 'com.google.dagger:hilt-android:2.44.2'
+    kapt 'com.google.dagger:hilt-compiler:2.44.2'
     // endregion Dagger2 ===========================================================================
 
     // region Gson =================================================================================
@@ -90,4 +90,8 @@ dependencies {
     testImplementation "io.mockk:mockk-android:${mockkVersion}"
     testImplementation "io.mockk:mockk-agent:${mockkVersion}"
     // endregion mockK =============================================================================
+}
+
+kapt {
+    correctErrorTypes true
 }

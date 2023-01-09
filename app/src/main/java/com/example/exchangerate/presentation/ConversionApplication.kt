@@ -1,11 +1,8 @@
 package com.example.exchangerate.presentation
 
 import android.app.Application
-import com.example.exchangerate.di.app.AppComponent
-import com.example.exchangerate.di.app.DaggerAppComponent
+import dagger.hilt.android.HiltAndroidApp
 
-class ConversionApplication : Application() {
-    val appComponent: AppComponent by lazy {
-        DaggerAppComponent.create()
-    }
-}
+
+@HiltAndroidApp(Application::class)
+class ConversionApplication : Hilt_ConversionApplication()
