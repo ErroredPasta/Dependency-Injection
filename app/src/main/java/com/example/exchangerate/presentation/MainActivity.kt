@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
     private val mainActivityContainer by lazy {
         (application as ConversionApplication).appContainer
-            .activityContainerFactory.create()
+            .mainActivityContainerFactory.create()
     }
 
     private val baseCurrencySelectionDialog by lazy {

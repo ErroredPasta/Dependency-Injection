@@ -3,7 +3,7 @@ package com.example.exchangerate.di.app
 import androidx.lifecycle.ViewModelProvider
 import com.example.exchangerate.data.remote.ExchangeRateApi
 import com.example.exchangerate.data.repository.ConversionRepositoryImpl
-import com.example.exchangerate.di.activity.ActivityContainer
+import com.example.exchangerate.di.activity.MainActivityContainer
 import com.example.exchangerate.domain.repository.ConversionRepository
 import com.example.exchangerate.presentation.MainViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -46,9 +46,9 @@ class AppContainer {
     val viewModelFactory: ViewModelProvider.Factory
         get() = MainViewModel.Factory(provider = mainViewModelProvider)
 
-    val activityContainerFactory = object : ActivityContainer.Factory {
-        override fun create(): ActivityContainer =
-            ActivityContainer(appContainer = this@AppContainer)
+    val mainActivityContainerFactory = object : MainActivityContainer.Factory {
+        override fun create(): MainActivityContainer =
+            MainActivityContainer(appContainer = this@AppContainer)
     }
 
     companion object {

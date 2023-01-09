@@ -7,10 +7,9 @@ import com.example.exchangerate.domain.model.Currency
 import com.example.exchangerate.domain.repository.ConversionRepository
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
-import javax.inject.Inject
 import javax.inject.Provider
 
-class MainViewModel @Inject constructor(
+class MainViewModel(
     private val repository: ConversionRepository
 ) : ViewModel() {
 
@@ -55,7 +54,7 @@ class MainViewModel @Inject constructor(
         _inputState.update { it.copy(targetCurrency = targetCurrency) }
     }
 
-    class Factory @Inject constructor(
+    class Factory(
         private val provider: Provider<MainViewModel>
     ) : ViewModelProvider.Factory {
 
