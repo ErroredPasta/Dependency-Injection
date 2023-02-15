@@ -1,14 +1,13 @@
 package com.example.exchangerate.presentation
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.exchangerate.R
 import com.example.exchangerate.databinding.ActivityMainBinding
+import com.example.exchangerate.di.activity.ViewModelType
 import com.example.exchangerate.domain.exception.ConversionException
 import com.example.exchangerate.domain.model.Currency
 import com.google.android.material.snackbar.Snackbar
@@ -22,8 +21,8 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel by viewModels<MainViewModel> { viewModelFactory }
+    @ViewModelType(MainViewModel::class)
+    lateinit var viewModel: MainViewModel
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
@@ -56,7 +55,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as ConversionApplication).appComponent
             .getMainActivityComponentFactory()
-            .create()
+            .create(this)
             .inject(this)
 
         super.onCreate(savedInstanceState)

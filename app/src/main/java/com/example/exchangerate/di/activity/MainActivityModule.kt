@@ -10,6 +10,7 @@ import dagger.Provides
 object MainActivityModule {
 
     @Provides
+    @ViewModelType(MainViewModel::class)
     fun provideMainViewModel(
         activity: MainActivity,
         viewModelFactory: ViewModelProvider.Factory
