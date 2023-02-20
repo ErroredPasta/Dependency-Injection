@@ -1,16 +1,13 @@
 package com.example.exchangerate.presentation
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.exchangerate.domain.model.Currency
 import com.example.exchangerate.domain.repository.ConversionRepository
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
-import javax.inject.Inject
-import javax.inject.Provider
 
-class MainViewModel @Inject constructor(
+class MainViewModel(
     private val repository: ConversionRepository
 ) : ViewModel() {
 
@@ -53,16 +50,6 @@ class MainViewModel @Inject constructor(
 
     fun onTargetCurrencyChange(targetCurrency: Currency) {
         _inputState.update { it.copy(targetCurrency = targetCurrency) }
-    }
-
-    class Factory @Inject constructor(
-        private val provider: Provider<MainViewModel>
-    ) : ViewModelProvider.Factory {
-
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return provider.get() as T
-        }
     }
 }
 

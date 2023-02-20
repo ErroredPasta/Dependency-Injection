@@ -10,9 +10,8 @@ import com.example.exchangerate.util.runCoroutineCatching
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
-import javax.inject.Inject
 
-class ConversionRepositoryImpl @Inject constructor(
+class ConversionRepositoryImpl(
     private val api: ExchangeRateApi,
     private val ioDispatcher: CoroutineDispatcher
 ) : ConversionRepository {

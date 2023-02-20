@@ -7,7 +7,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.exchangerate.R
 import com.example.exchangerate.databinding.ActivityMainBinding
-import com.example.exchangerate.di.activity.ViewModelType
 import com.example.exchangerate.domain.exception.ConversionException
 import com.example.exchangerate.domain.model.Currency
 import com.google.android.material.snackbar.Snackbar
@@ -16,13 +15,11 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    @Inject
-    @ViewModelType(MainViewModel::class)
-    lateinit var viewModel: MainViewModel
+    private val viewModel by viewModel<MainViewModel>()
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
@@ -53,11 +50,6 @@ class MainActivity : AppCompatActivity() {
 
     @FlowPreview
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as ConversionApplication).appComponent
-            .getMainActivityComponentFactory()
-            .create(this)
-            .inject(this)
-
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 

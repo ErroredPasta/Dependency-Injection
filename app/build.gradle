@@ -60,10 +60,9 @@ dependencies {
     testImplementation "com.squareup.okhttp3:mockwebserver:4.9.3"
     // endregion Retrofit2 =========================================================================
 
-    // region Dagger2 ==============================================================================
-    implementation 'com.google.dagger:dagger:2.43.2'
-    kapt 'com.google.dagger:dagger-compiler:2.43.2'
-    // endregion Dagger2 ===========================================================================
+    // region Koin =================================================================================
+    implementation 'io.insert-koin:koin-android:3.3.3'
+    // endregion Koin ==============================================================================
 
     // region Gson =================================================================================
     implementation 'com.google.code.gson:gson:2.9.0'

@@ -1,19 +1,9 @@
 package com.example.exchangerate.di.activity
 
-import androidx.lifecycle.ViewModelProvider
-import com.example.exchangerate.presentation.MainActivity
 import com.example.exchangerate.presentation.MainViewModel
-import dagger.Module
-import dagger.Provides
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.module
 
-@Module
-object MainActivityModule {
-
-    @Provides
-    @ViewModelType(MainViewModel::class)
-    fun provideMainViewModel(
-        activity: MainActivity,
-        viewModelFactory: ViewModelProvider.Factory
-    ): MainViewModel = ViewModelProvider(activity, viewModelFactory)[MainViewModel::class.java]
-
+val mainActivityModule = module {
+    viewModel { MainViewModel(get()) }
 }
